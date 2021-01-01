@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Test;
 public class TestJunitBoard {
 	@Test
 	public void boardtestone() {
-		Board board1=new Board(10);
-		Board board2=new Board(10);
+		Board board1=new Board(10,10);
+		Board board2=new Board(10,10);
 		board1.createBoard();
 		board2.createBoard();
 		board2=board1.Nextgen(board2);
@@ -26,8 +26,8 @@ public class TestJunitBoard {
 	}
 	@Test
 	public void boardtesttwo() {
-		Board board1=new Board(10);
-		Board board2=new Board(10);
+		Board board1=new Board(10,10);
+		Board board2=new Board(10,10);
 		board1.createBoard();
 		board2.createBoard();
 		board1.cell[1][3].setStatus(true);

@@ -282,21 +282,20 @@ public class UserInterface {
 //	GridPane gridPane = new GridPane();
 	private void loadImageData() {
 		try {
-			c.Start(arr, boardSizeHeight);	//Used to intialize the board with the live cells
-			r=new Rectangle(0,0,0,0);					
-			window.getChildren().remove(rect_inner);	//refreshing the inner rectangle for everygeneration
-			window.getChildren().add(rect_inner);
+//			System.out.println(boardSizeHeight+","+boardSizeWidth);
+			c.Start(arr, boardSizeHeight,boardSizeWidth);	//Used to intialize the board with the live cells
+			r=new Rectangle(0,0,0,0);						//creating rectangle
 			for(int i=0;i<c.b1.getSize();i++) {
-				for(int j=0;j<c.b1.getSize();j++) {
+				for(int j=0;j<c.b1.size1;j++) {
 					if(c.b1.cell[i][j].isStatus()) {
-						r=new Rectangle(6+i*cellSize,6+j*cellSize,cellSize,cellSize); 		//rectangle object
-						r.setFill(Color.BLACK);
-						evenCanvas.getChildren().add(r);
+						r=new Rectangle(6+j*cellSize,6+i*cellSize,cellSize,cellSize); 		//rectangle object
+						r.setFill(Color.BLACK);			//filling the live cells
+						evenCanvas.getChildren().add(r);	//adding the object to the canvas
 					}
 				}
 			}
 			
-			window.getChildren().add(evenCanvas);
+			window.getChildren().add(evenCanvas);		//adding that canvas to the pane
 		
 		}
 		catch (Exception e)  {
@@ -338,19 +337,18 @@ public class UserInterface {
 		// Use the toggle to flip back and forth between the current generation and next generation boards.
 		
 		// Your code goes here...'
+		
 		if(toggle) {
-			window.getChildren().remove(evenCanvas);
+			window.getChildren().remove(evenCanvas);		//removing the present canvas which is in pane
 			window.getChildren().remove(oddCanvas);
 			evenCanvas=new Pane();
-			r=new Rectangle(0,0,0,0);					
-			window.getChildren().remove(rect_inner);	//refreshing the inner rectangle for everygeneration
-			window.getChildren().add(rect_inner);
+			r=new Rectangle(0,0,0,0);						//creating new canvas
 			for(int i=0;i<c.b1.getSize();i++) {
-				for(int j=0;j<c.b1.getSize();j++) {
+				for(int j=0;j<c.b1.size1;j++) {
 					if(c.b1.cell[i][j].isStatus()) {
-						r=new Rectangle(6+i*cellSize,6+j*cellSize,cellSize,cellSize); 		//rectangle object
+						r=new Rectangle(6+j*cellSize,6+i*cellSize,cellSize,cellSize); 		//rectangle object
 						r.setFill(Color.BLACK);					//Filling black colour
-						evenCanvas.getChildren().add(r);
+						evenCanvas.getChildren().add(r);		//adding the rectangle into scene
 					}
 				}
 			}
@@ -359,23 +357,21 @@ public class UserInterface {
 		
 		}
 		else {
-			window.getChildren().remove(oddCanvas);
+			window.getChildren().remove(oddCanvas);			//removing the present canvas which is in pane
 			window.getChildren().remove(evenCanvas);
-			oddCanvas=new Pane();
-			r=new Rectangle(0,0,0,0);					
-			window.getChildren().remove(rect_inner);	//refreshing the inner rectangle for everygeneration
-			window.getChildren().add(rect_inner);
+			oddCanvas=new Pane();							//creating new canvas
+			r=new Rectangle(0,0,0,0);						//creating rectangle object
 			for(int i=0;i<c.b1.getSize();i++) {
-				for(int j=0;j<c.b1.getSize();j++) {
+				for(int j=0;j<c.b1.size1;j++) {
 					if(c.b1.cell[i][j].isStatus()) {
-						r=new Rectangle(6+i*cellSize,6+j*cellSize,cellSize,cellSize); 		//rectangle object
+						r=new Rectangle(6+j*cellSize,6+i*cellSize,cellSize,cellSize); 		//rectangle object
 						r.setFill(Color.BLACK);				//Filling black colour
 						oddCanvas.getChildren().add(r);		//adding into scene
 					}
 				}
 			}
-			window.getChildren().add(oddCanvas);
-			c.nextGen();
+			window.getChildren().add(oddCanvas);			//adding the canvas to window
+			c.nextGen();				//calling nextgeneration
 		}
 		
 			
@@ -457,8 +453,8 @@ public class UserInterface {
 		
 		// Should the execution reach here, the input file appears to be valid
 		errorMessage_FileContents = "";
-		arr=new int[lineNumber][2];
-		System.out.println(lineNumber);
+		arr=new int[lineNumber][2];		//creating array
+//		System.out.println(lineNumber);
 		//to insert the data into the live cell array
 		lineNumber=0;
 //		scanner_Input.close();
@@ -466,7 +462,7 @@ public class UserInterface {
 		arr[lineNumber][0]=Integer.parseInt(s.split(" ")[0]);	//first element
 			arr[lineNumber][1]=Integer.parseInt(s.split(" ")[1]);	//second element
 			lineNumber++;
-			System.out.print("hii");
+//			System.out.print("hii");
 		}
 		
 		return true;							// End of file found 

@@ -6,16 +6,18 @@ package console;
 import java.util.Arrays;
 
 public class Board {
-	private int size;	//Size of the board (Declaration)
+	private int size;			//Size of the board (Declaration)
+	public int size1;
 	public Cell[][] cell;		//cell array used to in the board for N X N Board
 	
 	/*
 	 * Constructor used to assign memory for cell array
 	 * i.e intializing variable
 	 * */
-	public Board(int size) {
+	public Board(int size,int size1) {
 		this.size = size;
-		this.cell=new Cell[this.size][this.size];
+		this.size1=size1;
+		this.cell=new Cell[this.size][this.size1];
 	}
 	
 	/*
@@ -24,7 +26,7 @@ public class Board {
 	 * */
 	public Board createBoard() {
 		for (int i = 0; i < this.getSize(); i++) {
-			for (int j = 0; j < this.getSize(); j++) {
+			for (int j = 0; j < this.size1; j++) {
 				this.cell[i][j] = new Cell(false);
 			}
 		}
@@ -38,6 +40,10 @@ public class Board {
 		
 		return ((x % this.size) + this.size) % this.size;
 	}
+	public int mdivision1(int x) {
+		
+		return ((x % this.size1) + this.size1) % this.size1;
+	}
 	
 	/*
 	 * Nextgen function is used to generate next generation with current generation as parameter
@@ -48,30 +54,30 @@ public class Board {
 	 * */
 	public Board Nextgen(Board board) {
 		for (int i = 0; i < this.size; i++) {
-			for (int j = 0; j < this.size; j++) {
+			for (int j = 0; j < this.size1; j++) {
 				int check = 0;
-				if (this.cell[mdivision(i + 1)][mdivision(j + 1)].isStatus()) {
+				if (this.cell[mdivision(i + 1)][mdivision1(j + 1)].isStatus()) {
 					check++;
 				}
-				if (this.cell[mdivision(i - 1)][mdivision(j - 1)].isStatus()) {
+				if (this.cell[mdivision(i - 1)][mdivision1(j - 1)].isStatus()) {
 					check++;
 				}
-				if (this.cell[mdivision(i)][mdivision(j + 1)].isStatus()) {
+				if (this.cell[mdivision(i)][mdivision1(j + 1)].isStatus()) {
 					check++;
 				}
-				if (this.cell[mdivision(i)][mdivision(j - 1)].isStatus()) {
+				if (this.cell[mdivision(i)][mdivision1(j - 1)].isStatus()) {
 					check++;
 				}
-				if (this.cell[mdivision(i + 1)][mdivision(j)].isStatus()) {
+				if (this.cell[mdivision(i + 1)][mdivision1(j)].isStatus()) {
 					check++;
 				}
-				if (this.cell[mdivision(i - 1)][mdivision(j)].isStatus()) {
+				if (this.cell[mdivision(i - 1)][mdivision1(j)].isStatus()) {
 					check++;
 				}
-				if (this.cell[mdivision(i + 1)][mdivision(j - 1)].isStatus()) {
+				if (this.cell[mdivision(i + 1)][mdivision1(j - 1)].isStatus()) {
 					check++;
 				}
-				if (this.cell[mdivision(i - 1)][mdivision(j + 1)].isStatus()) {
+				if (this.cell[mdivision(i - 1)][mdivision1(j + 1)].isStatus()) {
 					check++;
 				}
 				
@@ -101,7 +107,7 @@ public class Board {
 	public String toString() {
 		String res="";
 		for(int i=0;i<this.size;i++) {
-			for(int j=0;j<this.size;j++) {
+			for(int j=0;j<this.size1;j++) {
 				if(this.cell[i][j].isStatus()) {
 					res+="*";
 				}
